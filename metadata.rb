@@ -16,3 +16,4 @@ recipe 'opsworks_que::stop', 'Stop que worker.'
 # depends 'deploy'
 
 depends 'supervisor'
+depends 'deploy'
