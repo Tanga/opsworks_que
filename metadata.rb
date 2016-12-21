@@ -3,7 +3,7 @@ maintainer       "Tanga"
 maintainer_email "dev@tanga.com"
 license          "MIT"
 description      "Configure and deploy background job workers using que."
-version          "0.8"
+version          "0.8.1"
 
 recipe 'opsworks_que::setup', 'Set up que worker.'
 recipe 'opsworks_que::configure', 'Configure que worker.'
