@@ -13,7 +13,7 @@ node[:deploy].each do |application, deploy|
     user deploy[:user]
     directory "#{deploy[:deploy_to]}/current"
     environment RAILS_ENV: 'production'
-    command node[:que][:start_command]
+    command "./bin/que --worker-count #{node[:que][:worker_count]} -l debug ./config/environment.rb"
     stopsignal "KILL"
   end
 
