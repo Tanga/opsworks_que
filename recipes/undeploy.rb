@@ -1,6 +1,5 @@
 # Adapted from deploy::rails-undeploy: https://github.com/aws/opsworks-cookbooks/blob/master/deploy/recipes/rails-undeploy.rb
 
-include_recipe 'deploy'
 
 node[:deploy].each do |application, deploy|
   if deploy[:application_type] != 'rails'
