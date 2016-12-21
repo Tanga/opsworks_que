@@ -25,5 +25,7 @@ node[:deploy].each do |application, deploy|
 
   default[:delayed_job][application][:restart_command] = "sudo monit restart -g delayed_job_#{application}_group"
 
+  default[:que][:start_command] = './bin/que --worker-count 10 -l debug ./config/environment.rb'
+
 end
 

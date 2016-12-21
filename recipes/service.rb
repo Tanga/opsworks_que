@@ -1,16 +1,20 @@
-service "monit" do
-  supports :status => false, :restart => true, :reload => true
-  action :nothing
+apt_package "python-software-properties" do
+  action :install
 end
 
+# start services
+
+include_recipe "supervisor"
 
 node[:deploy].each do |application, deploy|
-  
-  # Overwrite the unicorn restart command declared elsewhere
-  # Apologies for the `sleep`, but monit errors with "Other action already in progress" on some boots.
-  execute "restart Rails app #{application}" do
-    command "sleep 300 && #{node[:delayed_job][application][:restart_command]}"
-    action :nothing
+
+  supervisor_service "que" do
+    action :enable
+    user deploy[:user]
+    directory "#{deploy[:deploy_to]}/current"
+    environment RAILS_ENV: 'production'
+    command node[:que][:start_command]
+    stopsignal "KILL"
   end
-  
+
 end
